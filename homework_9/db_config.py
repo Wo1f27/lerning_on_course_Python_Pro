@@ -9,6 +9,15 @@ session = sessionmaker(bind=engine)
 Base = declarative_base()
 
 
+class SessionContext:
+    def __enter__(self):
+        self.db = session()
+        return self.db
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.db.close()
+
+
 def init_db():
     Base.metadata.create_all()
 

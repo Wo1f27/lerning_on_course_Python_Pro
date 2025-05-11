@@ -1,3 +1,5 @@
 .idea
-.txt
-.pyc
+*.txt
+*.pyc
+
+__pycache__/
