@@ -1,15 +1,23 @@
 from sqlalchemy.orm import Session
 
-from .entities import Book, BookCreate
+from .entities import BookSchema, BookCreateSchema
 from .models import Book, Reader, BorrowedBook
 
 from .interfaces import LibraryService
+from .repository import BookRepositoryImpl
+from .db_config import SessionContext
 
 
 class LibraryActivity(LibraryService):
-    def add_book(self, db: Session, book_data: BookCreate, quantity: int = 0):
-        pass
 
-    @staticmethod
-    def _is_unique(db: Session, book_data: BookCreate):
-        return db.query(Book).filter_by(title=book_data.title, author=book_data.title).first() is None
+    def __init__(self):
+        self.session = SessionContext()
+        self.book_repo = BookRepositoryImpl()
+
+    def add_book(self, book_data: BookCreateSchema) -> str:
+        with self.session as db:
+            res = self.book_repo.add_book(db, book_data)
+            return res
+
+
+

@@ -1,10 +1,14 @@
 from abc import ABC, abstractmethod
 from sqlalchemy.orm import Session
 
-from .entities import Book, BookCreate
+from .entities import BookSchema, BookCreateSchema
 
 
 class LibraryService(ABC):
     @abstractmethod
-    def add_book(self, db: Session, book_data: BookCreate, quantity: int = 0):
-        pass
+    def add_book(self, book_data: BookCreateSchema) -> str: ...
+
+
+class BookRepository(ABC):
+    @abstractmethod
+    def add_book(self, db: Session, book_data: BookCreateSchema, quantity: int = 0) -> str: ...
