@@ -37,3 +37,9 @@ class BookUpdateSchema(BaseModel):
         if v is not None and v < 0:
             raise ValueError('Год должен быть положительным числом')
         return v
+
+    @field_validator('quantity', mode='before')
+    def check_quantity(cls, v):
+        if v < 0:
+            raise ValueError('Количество должно быть положительным числом')
+        return v

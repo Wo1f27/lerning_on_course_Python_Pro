@@ -39,7 +39,8 @@ def test_update_book(library_activity):
     upd_data = BookUpdateSchema(
         id=book_id,
         title='Book_upd_2',
-        author='Author_2'
+        author='Author_2',
+        quantity=-5
     )
 
     updated_book = library_activity.update_book(upd_data=upd_data)
