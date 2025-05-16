@@ -1,5 +1,7 @@
 .idea
 *.txt
 *.pyc
+.env
+*.env
 
 __pycache__/
