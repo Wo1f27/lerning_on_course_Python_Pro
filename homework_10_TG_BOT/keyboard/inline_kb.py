@@ -8,7 +8,10 @@ keyboard_inline = InlineKeyboardMarkup(inline_keyboard=[
     [btn1], [btn2], [btn3]
 ])
 
-kb = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Сок', callback_data='juice')],
-    [InlineKeyboardButton(text='Чай', callback_data='tea')]
-])
+
+def create_keyboard_inline(notes: list):
+    keyboard = InlineKeyboardMarkup()
+    for note in notes:
+        keyboard.add(InlineKeyboardButton(text=note, callback_data=f'delete_{note}'))
+
+    return keyboard

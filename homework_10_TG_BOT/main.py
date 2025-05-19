@@ -1,25 +1,18 @@
 import asyncio
 import logging
-import os
 import sys
 
-from aiogram import Bot, Dispatcher
-from aiogram.client.default import DefaultBotProperties
-from aiogram.enums import ParseMode
+from aiogram import Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
-from dotenv import load_dotenv
 
 from handlers import user_handler
 
-load_dotenv()
-
-TOKEN = os.getenv('TOKEN')
+from homework_10_TG_BOT.bot_config import bot
 
 dp = Dispatcher(storage=MemoryStorage())
 dp.include_router(user_handler.router)
 
 async def main():
-    bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
