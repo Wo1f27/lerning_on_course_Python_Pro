@@ -10,8 +10,10 @@ keyboard_inline = InlineKeyboardMarkup(inline_keyboard=[
 
 
 def create_keyboard_inline(notes: list):
-    keyboard = InlineKeyboardMarkup()
+    key_list = []
     for note in notes:
-        keyboard.add(InlineKeyboardButton(text=note, callback_data=f'delete_{note}'))
+        key_list.append([InlineKeyboardButton(text=note, callback_data=f'delete_{note}')])
+
+    keyboard = InlineKeyboardMarkup(inline_keyboard=key_list)
 
     return keyboard
