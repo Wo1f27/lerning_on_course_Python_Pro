@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главая страница</title>
+</head>
+<body>
+    <h1><b>Добро пожаловать!</b></h1>
+    <p>Это главная страница библиотеки</p>
+    <p>Выберите что хотите сделать: </p>
+    <ol>
+        <li><a href="{% url 'list_books' %}" style="line-height: 1.5;">Список книг</a></li>
+        <li><a href="{% url 'add_book' %}" style="line-height: 1.5;">Добавить книгу в библиотеку</a></li>
+
+    </ol>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить книгу: {{ book.title }}</title>
+</head>
+<body>
+    <h1>Изменить книгу: {{ book.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить изменения</button>
+    </form>
+    <a href="{% url 'detail_book' book.id %}" style="line-height: 2.5;">Назад к книге</a>
+</body>
+</html>

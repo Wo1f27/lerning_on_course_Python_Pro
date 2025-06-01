@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список книг</title>
+</head>
+<body>
+    <h1><b>Список книг библиотеки</b></h1>
+    <ul>
+        {% if books %}
+            {% for book in books %}
+                <li style="line-height: 2.0;">
+                    <a href="{% url 'detail_book' book.id %}">
+                        {{ book.title }}({{ book.published_year }}) - {{ book.author }}
+                    </a>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>Книг в библиотеке нет.</li>
+        {% endif %}
+    </ul>
+    <p>Выберите что хотите сделать: </p>
+    <ol>
+        <li style="line-height: 1.5;"><a href="{% url 'home' %}">На главную</a></li>
+        <li style="line-height: 1.5;"><a href="{% url 'add_book' %}">Добавить книгу в библиотеку</a></li>
+
+    </ol>
+</body>
+</html>

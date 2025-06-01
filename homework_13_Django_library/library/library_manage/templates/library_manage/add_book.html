@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление книги</title>
+</head>
+<body>
+    <h1><b>Добавить книгу</b></h1>
+    <p>Заполните поля ниже и нажмите Добавить для добавления книги в библиотеку</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if form.errors %}
+            <div>
+                <p>Пожалуйста, исправьте следующие ошибки:</p>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <button type="submit">Добавить</button>
+    </form>
+    <p>Выберите что хотите сделать: </p>
+    <ol>
+        <li><a href="{% url 'home' %}">На главную</a></li>
+    </ol>
+</body>
+</html>
