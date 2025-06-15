@@ -5,7 +5,7 @@ from .schemas import TaskCreate
 
 
 def get_tasks_list(db: Session):
-    tasks = db.query(select(Task)).all()
+    tasks = db.query(Task).all()
     return tasks
 
 
@@ -16,14 +16,14 @@ def get_task(db: Session, task_id: int):
 
 def add_task(db:Session, task: TaskCreate):
     task = Task(name=task.name, deadline=task.deadline)
-    db.add(Task)
+    db.add(task)
     db.commit()
     db.refresh(task)
     return task
 
 
 def delete_task(db: Session, task_id: int):
-    task = db.query(select(Task).filter(Task.id == task_id)).first()
+    task = db.query(Task).filter(Task.id == task_id).first()
     db.delete(task)
     db.commit()
     return {'success': 'true'}

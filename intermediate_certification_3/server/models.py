@@ -1,10 +1,10 @@
-from sqlalchemy import Column, Integer, Text, DateTime
+from sqlalchemy import Column, Integer, String, DateTime
 from .db import Base
 
 
 class Task(Base):
-    __table_name__ = 'tasks'
+    __tablename__ = 'tasks'
 
     id = Column(Integer, primary_key=True)
-    name = Column(Text, max_length=500)
+    name = Column(String(500))
     deadline = Column(DateTime)

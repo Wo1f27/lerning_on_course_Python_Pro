@@ -1,7 +1,8 @@
+import uvicorn
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from .db import SessionLocal, engine
-from . import models, crud, schemas
+from intermediate_certification_3.server.db import SessionLocal, engine
+from intermediate_certification_3.server import models, crud, schemas
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -29,7 +30,12 @@ def add_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
 @app.delete("/tasks/{task_id}")
 def delete_task(task_id: int, db: Session = Depends(get_db)):
     task = crud.delete_task(db=db, task_id=task_id)
-    if task.success == 'true':
+    print(f'hera ', type(task))
+    if task['success'] == 'true':
         return {'success': 'true'}
     else:
         return 'Ошибка'
+
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='127.0.0.1', port=8000)
