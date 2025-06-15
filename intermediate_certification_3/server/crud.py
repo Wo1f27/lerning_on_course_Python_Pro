@@ -1,0 +1,29 @@
+from sqlalchemy import select, insert, delete
+from sqlalchemy.orm import Session
+from .models import Task
+from .schemas import TaskCreate
+
+
+def get_tasks_list(db: Session):
+    tasks = db.query(select(Task)).all()
+    return tasks
+
+
+def get_task(db: Session, task_id: int):
+    task = db.query(select(Task).filter(Task.id == task_id)).first()
+    return task
+
+
+def add_task(db:Session, task: TaskCreate):
+    task = Task(name=task.name, deadline=task.deadline)
+    db.add(Task)
+    db.commit()
+    db.refresh(task)
+    return task
+
+
+def delete_task(db: Session, task_id: int):
+    task = db.query(select(Task).filter(Task.id == task_id)).first()
+    db.delete(task)
+    db.commit()
+    return {'success': 'true'}
