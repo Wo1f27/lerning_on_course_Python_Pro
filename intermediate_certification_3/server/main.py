@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from intermediate_certification_3.server.db import SessionLocal, engine
+from intermediate_certification_3.server.schemas import TaskSchema
 from intermediate_certification_3.server import models, crud, schemas
 
 models.Base.metadata.create_all(bind=engine)
@@ -17,7 +18,7 @@ def get_db():
         db.close()
 
 
-@app.get('/tasks/')
+@app.get('/tasks/', response_model=list[TaskSchema])
 def get_tasks_list(db: Session = Depends(get_db)):
     return crud.get_tasks_list(db=db)
 

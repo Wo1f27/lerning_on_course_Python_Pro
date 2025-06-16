@@ -1,12 +1,12 @@
 from sqlalchemy import select, insert, delete
 from sqlalchemy.orm import Session
 from .models import Task
-from .schemas import TaskCreate
+from .schemas import TaskCreate, TaskSchema
 
 
-def get_tasks_list(db: Session):
+def get_tasks_list(db: Session) -> list[TaskSchema]:
     tasks = db.query(Task).all()
-    return tasks
+    return [TaskSchema(id=task.id, name=task.name, deadline=task.deadline) for task in tasks]
 
 
 def get_task(db: Session, task_id: int):
