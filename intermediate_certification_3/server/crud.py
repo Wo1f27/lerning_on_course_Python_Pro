@@ -9,8 +9,8 @@ def get_tasks_list(db: Session) -> list[TaskSchema]:
     return [TaskSchema(id=task.id, name=task.name, deadline=task.deadline) for task in tasks]
 
 
-def get_task(db: Session, task_id: int):
-    task = db.query(select(Task).filter(Task.id == task_id)).first()
+def get_task(db: Session, task_name: int):
+    task = db.query(select(Task).filter(Task.name == task_name)).first()
     return task
 
 

@@ -15,7 +15,7 @@ router = Router()
 
 @router.message(CommandStart())
 async def start_bot(m: Message):
-    await m.answer('Привет я бот! Введи команду /go для старта. Помощь /help')
+    await m.answer('Привет я бот! Введи команду /go для показа меню действий. Помощь /help')
 
 
 @router.message(Command('help'))
@@ -121,13 +121,13 @@ async def handle_delete_task_callback(cb: CallbackQuery, state: FSMContext):
         tasks = response.json()
 
         if tasks:
-            task_for_delete = [f"ID {task['id']} {task['name']}" for task in tasks]
+            task_for_delete = [f"{task['id']}" for task in tasks]
         else:
             task_for_delete = []
 
         if task_to_delete in task_for_delete:
             try:
-                response = requests.delete('http://127.0.0.1:8000/tasks')
+                response = requests.delete(f'http://127.0.0.1:8000/tasks/{task_to_delete}')
                 response.raise_for_status()
 
                 await cb.answer(f'Задача "{task_to_delete}" была удалена.')

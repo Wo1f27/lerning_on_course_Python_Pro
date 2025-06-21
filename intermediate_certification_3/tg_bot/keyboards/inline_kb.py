@@ -12,7 +12,7 @@ keyboard_inline = InlineKeyboardMarkup(inline_keyboard=[
 def create_keyboard_inline(tasks: list):
     key_list = []
     for task in tasks:
-        key_list.append([InlineKeyboardButton(text=task, callback_data=f'delete_{task}')])
+        key_list.append([InlineKeyboardButton(text=task['name'], callback_data=f"delete_{task['id']}")])
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=key_list)
 

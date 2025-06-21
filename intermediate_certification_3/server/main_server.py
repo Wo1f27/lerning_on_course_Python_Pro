@@ -31,7 +31,6 @@ def add_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
 @app.delete("/tasks/{task_id}")
 def delete_task(task_id: int, db: Session = Depends(get_db)):
     task = crud.delete_task(db=db, task_id=task_id)
-    print(f'hera ', type(task))
     if task['success'] == 'true':
         return {'success': 'true'}
     else:
